@@ -17,6 +17,6 @@
         repo = "tree/master/TabletPrograms"
       }
     }
-  }	
+  }
 }
 
