@@ -3,3 +3,4 @@ https://openprograms.github.io/
 
 OPPM
 https://ocdoc.cil.li/tutorial:program:oppm
+https://github.com/OpenPrograms/Vexatos-Programs/blob/master/oppm/etc/example-config.cfg

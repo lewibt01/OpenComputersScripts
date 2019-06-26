@@ -1,7 +1,5 @@
 {
-  --default installation path
   path="/usr",
-  --Additional repositories and packages go here, for correct package syntax, check https://github.com/OpenPrograms/Vexatos-Programs/blob/master/oppm/etc/example-config.cfg
   repos={
     ["lewibt01/OpenComputersScripts"] = {
       ["nanomachine-control"] = {
