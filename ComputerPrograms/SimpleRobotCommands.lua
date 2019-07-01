@@ -1,8 +1,8 @@
 local arg = { ... }
 component = require("component")
 o=require("os")
-r=require("robot")
-rAPI=component.robot
+robot=require("robot")
+robotAPI=component.robot
 
 --repeatedly attempt to call a function until it returns
 function repeatAttempt(numAttempts,timeInterval,func)
