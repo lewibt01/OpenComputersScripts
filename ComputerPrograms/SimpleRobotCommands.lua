@@ -29,10 +29,12 @@ function interpret(input)
             repeatAttempt(20,0.5,robot.forward)
         end
         if tmp=="e" then
-            while not robot.up() do os.sleep(0.1) end
+			repeatAttempt(20,0.5,robot.up)
+            --while not robot.up() do os.sleep(0.1) end
         end
         if tmp=="c" then
-            while not robot.down() do os.sleep(0.1) end
+			repeatAttempt(20,0.5,robot.down)
+            --while not robot.down() do os.sleep(0.1) end
         end
        
         --aggressive ensured movement functions
