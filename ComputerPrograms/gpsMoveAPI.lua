@@ -92,36 +92,6 @@ function gpsMove.turnLeft()
 end
 
 --[[Compund Functions]]
---DEPRECATED--
-function gpsMove.face(orient)
-	--prevent illegal orientations
-	orient = orient % 4
-	local current = gpsMove.orientation
-	local delta = current-orient
-	local magnitude = math.abs(current-orient)
-	--local numMoves = delta % 2 --should never take more than 2 turns
-	print("Before Turn: currentOrient:"..current.."("..gpsMove.orientation.."); delta:"..delta.."; destination: "..orient)
-	local result = false --catch a move if it fails
-
-	if(delta == 3) then
-		--move counterclockwise
-		result = gpsMove.turnLeft()
-	elseif(delta == 2) then
-		--doesn't matter, so move clockwise twice
-		--capture both results in case one of them fails
-		result = gpsMove.turnRight()
-		result = gpsMove.turnRight()
-	elseif(delta == 1) then
-		--move clockwise
-		result = gpsMove.turnRight()
-	else
-		result = true--we are already at the target orientation
-	end
-	print("After Turn: currentOrient:"..current.."("..gpsMove.orientation.."); delta:"..delta.."; destination: "..orient)
-
-	return result
-end
-
 function gpsMove.turnTo(orient)
 	orient = orient % 4
 	local result
@@ -152,7 +122,7 @@ function gpsMove.moveTo(x,y,z)
 	local dX = x-gpsMove.pos[1]
 	local dY = y-gpsMove.pos[2]
 	local dZ = z-gpsMove.pos[3]
-	print("Delta",dX,dY,dZ)
+	--print("Delta",dX,dY,dZ)
 
 	local function moveAmnt(func,amnt)
 		local result
