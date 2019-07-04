@@ -42,7 +42,7 @@ end
 function gpsMove.back()
 	local result = r.back()
 	if(result) then
-		if(orientation == 0) then
+		if(gpsMove.orientation == 0) then
 			gpsMove.pos[3] = gpsMove.pos[3] + 1
 		elseif(gpsMove.orientation == 1) then
 			gpsMove.pos[1] = gpsMove.pos[1] - 1
@@ -229,5 +229,5 @@ function gpsMove.printOrientation()
 	print(gpsMove.orientationStr())
 end
 
-print("gpsMove Loaded")
+--print("gpsMove Loaded")
 return gpsMove
