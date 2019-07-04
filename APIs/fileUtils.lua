@@ -1,6 +1,6 @@
-local FileOps = {}
+local fileOps = {}
 
-function FileOps.Exists(path)
+function fileOps.exists(path)
 	local f = io.open(path,"r")
 	if(f~=nil) then
 		io.close(f)
@@ -10,21 +10,25 @@ function FileOps.Exists(path)
 	end
 end
 
-function FileOps.WriteString(data,path)
+function fileOps.writeString(data,path)
 	file = io.open(path,"w")
 	file:write(tostring(data))
 	file:close()
 end
 
-function FileOps.ReadString(path)
+function fileOps.readString(path)
 	file = io.open(path,"r")
 	return io.read(file)
 end
 
-function FileOps.AppendString(data,path)
+function fileOps.appendString(data,path)
 	file = io.open(path,"a")
 	file:write(tostring(data))
 	file:close()
 end
 
-return FileOps
+function fileOps.createFile(path)
+	fileOps.writeString("",path)
+end
+
+return fileOps
