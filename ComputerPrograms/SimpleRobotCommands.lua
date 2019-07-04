@@ -12,7 +12,94 @@ function repeatAttempt(numAttempts,timeInterval,func)
 	end
 end
 
+function isDigit(char)
+    if(char == "0" or char == "1" or char == "2" or char == "3" or char == "4" or char == "5" or char == "6" or char == "7" or char == "8" or char == "9" or char == "0") then
+        return true
+    else
+        return false
+    end
+end
+
+
+function aggressiveMove(numTries,moveFunc,attackFunc)
+    while (not moveFunc()) and (counter < numTries) do
+        attackFunc()
+    end
+end
+
 function interpret(input)
+    for i=1,string.len(input) do
+        local tmp = string.sub(input,i,i)
+
+        --movement functions
+        if(tmp == "f") then
+            robot.fowrard()
+        elseif(tmp == "l") then
+            robot.turnLeft()
+        elseif(tmp == "r") then
+            robot.turnRight()
+        elseif(tmp == "b") then
+            robot.back()
+        elseif(tmp == "d") then
+            robot.down()
+        elseif(tmp == "u") then
+            robot.up()
+
+        --passive ensured movement functions
+        ---will wait until whatever is in front of them moves away
+
+        elseif(tmp == "q") then
+            repeatAttempt(20,0.5,robot.forward)
+        elseif(tmp == "e") then
+            repeatAttempt(20,0.5,robot.up)
+        elseif(tmp == "c") then
+            repeatAttempt(20,0.5,robot.down)
+
+        --aggressive ensured movement functions
+        ---if movement fails it will try to remove obstacles
+        elseif(tmp == "Q") then
+            aggressiveMove(20,robot.forward,robot.swing)
+        elseif(tmp == "E") then
+            aggressiveMove(20,robot.up,robot.swingUp)
+        elseif(tmp == "C") then
+            aggressiveMove(20,robot.down,robot.swingDown)
+
+        --dig functions
+        elseif(tmp == "D") then
+            robot.swingDown()
+        elseif(tmp == "U") then
+            robot.swingUp()
+        elseif(tmp == "F") then
+            robot.swing()
+
+        --placement functions
+        elseif(tmp == "P") then
+            robot.place()
+        elseif(tmp == "A") then
+            robot.placeUp()
+        elseif(tmp == "B") then
+            robot.placeDown()
+
+        --inventory managemnet
+        elseif(isDigit(tmp)) then
+            robot.select(tonumber(tmp))
+        elseif(tmp == "!") then
+            robot.select(11)
+        elseif(tmp == "@") then
+            robot.select(12)
+        elseif(tmp == "#") then
+            robot.select(13)
+        elseif(tmp == "$") then
+            robot.select(14)
+        elseif(tmp == "%") then
+            robot.select(15)
+        elseif(tmp == "^") then
+            robot.select(16)
+    end
+end
+
+--[[    [DEPRECATED]
+function interpret_old(input)
     for i=1,string.len(input) do
         tmp = string.sub(input,i,i)
         --movement functions
@@ -84,5 +171,6 @@ function interpret(input)
         if tmp=="^" then robot.select(16) end
     end
 end
+]]
 
 interpret(table.concat(arg))
