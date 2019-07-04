@@ -1,3 +1,5 @@
+--Swarm Quarry Server program
+
 local component = require("component")
 local event = require("event")
 local m = component.modem
@@ -16,12 +18,16 @@ function sendBoosted(address,port,...)
 	return result
 end
 
-function sendCmd(groupID,cmd)
+function sendUnicast(id,cmd)
+
+end
+
+function sendMulticast(groupId,cmd)
 
 end
 
 function pollClient(address)
-	sendBoosted(address,"status")
+	sendBoosted(address,comPort,"handshake")
 end
 
 --get a status update from all listening clients
