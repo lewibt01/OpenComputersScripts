@@ -1,14 +1,17 @@
-local g = require("gpsMoveAPI")
+local g = require("gpsMove")
 local r = require("robot")
 local arg = {...}
 
-
+local iterations
 if(arg[1] == "") then 
 	iterations = 1
+else
+	iterations = tonumber(arg[1])
 end
+
 g.reZero()
 
-depth=0
+local depth=0
 function stepDown()
 	while(g.down() or r.swingDown()) do
 		depth = depth + 1
@@ -24,7 +27,7 @@ function stepUp()
 	end
 end
 
-for i=1,2 do
+for i=1,iterations do
 	stepDown()
 	r.swing()
 	g.forward()

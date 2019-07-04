@@ -1,17 +1,17 @@
 internet = require("internet")
 
-local Github = {}
-Github.BaseURL = "https://raw.githubusercontent.com/lewibt01/OpenComputersScripts/master/"
+local github = {}
+github.BaseURL = "https://raw.githubusercontent.com/lewibt01/OpenComputersScripts/master/"
 
-function Github.ReadFile(name)
+function github.ReadFile(name)
 	local handle = internet.open(BaseURL..name)
 	local data = handle:read()
 	handle:close()
 	return data
 end
 
-function Github.Clone(name,folderPath)
-	local data = Github.ReadFile(name)
+function github.Clone(name,folderPath)
+	local data = github.ReadFile(name)
 	
 	--ensure the folder path has a / at the end for when we append the file name
 	if(folderPath[#folderPath-1] ~= "/") then
@@ -24,4 +24,4 @@ function Github.Clone(name,folderPath)
 	file:close()
 end
 
-return Github
+return github

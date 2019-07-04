@@ -1,4 +1,4 @@
-local g = require("gpsMoveAPI")
+local g = require("gpsMove")
 local r = require("robot")
 
 local length=8
