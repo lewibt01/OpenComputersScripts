@@ -107,6 +107,8 @@ function gpsMove.turnTo(orient)
 		turnFunc = gpsMove.turnRight
 	elseif(direction < 0) then
 		turnFunc = gpsMove.turnLeft
+	elseif(direction = 0) then
+		--do nothing, we are 0 turns away from the desired orientation
 	else
 		print("Error in turnTo()")
 	end

@@ -16,3 +16,7 @@ end
 function props.delByKey(key)
 	
 end
+
+function props.delByValue(key)
+
+end
