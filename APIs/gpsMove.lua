@@ -107,8 +107,9 @@ function gpsMove.turnTo(orient)
 		turnFunc = gpsMove.turnRight
 	elseif(direction < 0) then
 		turnFunc = gpsMove.turnLeft
-	elseif(direction = 0) then
+	elseif(direction == 0) then
 		--do nothing, we are 0 turns away from the desired orientation
+		print("No turn necessary")
 	else
 		print("Error in turnTo()")
 	end
@@ -124,7 +125,7 @@ function gpsMove.moveTo(x,y,z)
 	local dX = x-gpsMove.pos[1]
 	local dY = y-gpsMove.pos[2]
 	local dZ = z-gpsMove.pos[3]
-	--print("Delta",dX,dY,dZ)
+	print("Delta",dX,dY,dZ)
 
 	local function moveAmnt(func,amnt)
 		local result
@@ -136,27 +137,29 @@ function gpsMove.moveTo(x,y,z)
 
 	local function moveVerticalAmnt(amount)
 		local result
-		if(amount>=0) then
+		if(amount > 0) then
 			result = moveAmnt(gpsMove.up,amount)
-		else
+		elseif(amount < 0) then
 			result = moveAmnt(gpsMove.down,amount)
 		end
 		return result
 	end
 
+	--x coordinates: + = right, - = left
 	local function moveXAmnt(amount)
-		if(amount >= 0) then
+		if(amount > 0) then
 			gpsMove.turnTo(1)
-		else
+		elseif(amount < 0) then
 			gpsMove.turnTo(3)
 		end
 		return moveAmnt(gpsMove.forward,amount)
 	end
 
+	--z coordinates: + = south, - = north
 	local function moveZAmnt(amount)
-		if(amount >= 0) then
+		if(amount > 0) then
 			gpsMove.turnTo(2)
-		else
+		elseif(amount < 0) then
 			gpsMove.turnTo(0)
 		end
 		return moveAmnt(gpsMove.forward,amount)

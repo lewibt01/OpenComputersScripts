@@ -40,7 +40,7 @@ end
 --load libraries/code
 modem.open(comPort)
 sendStr(compProxyStr("robot","robot"))
-sentStr(compProxyStr("g","gpsMove"))
+sendStr(compProxyStr("g","gpsMove"))
 sendStr(varStr())
 sendStr(funcStr())
 

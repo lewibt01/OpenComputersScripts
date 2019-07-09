@@ -15,3 +15,5 @@ function r.place() return true end
 function r.placeDown() return true end
 function r.placeUp() return true end
 function r.select() return true end
+
+return r
