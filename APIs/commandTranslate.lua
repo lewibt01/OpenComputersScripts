@@ -3,8 +3,9 @@ r = require("robot")
 
 cmd = {}
 
-function translate(input,...)
+function cmd.translate(input,...)
 	-- '...' denotes a special variable called 'arg', it stores an unknown number of arguments
+	local arg = {...}
 
 	local c = {} --commands lookup table, in lieu of a switch statement
 	--robot api functions
@@ -83,16 +84,19 @@ function translate(input,...)
 
 	--c["pushSignal"] = comp.pushSignal
 	--c["pullSignal"] = comp.pullSignal
-	c["beep"] = computer.beep
+	c["beep"] = comp.beep
 
 	
 	if c[input] == nil then
 		return false
 	end
-	if(#arg > 0) then
-		return c[input](table.unpack(arg))
-	else
-		return c[input]
+	if(arg ~= nil) then
+		for k,v in pairs(arg) do print(k..":"..v) end
+		if(#arg > 0) then
+			return c[input](table.unpack(arg))
+		else
+			return c[input]()
+		end
 	end
 end
 

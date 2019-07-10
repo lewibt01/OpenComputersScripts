@@ -3,7 +3,8 @@
 local component = require("component")
 local event = require("event")
 local m = component.modem
-local comPort = 2142
+local comPort = 2000
+local responsePort = 2001
 local baseSignalStrength = 100
 local boostSignalStrength = 400 --signal strength of boosted messages
 

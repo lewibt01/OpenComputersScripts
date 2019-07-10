@@ -1,13 +1,15 @@
+local component = require("component")
 local r = require("robot")
 local g = require("gpsMove")
-local t = require("commandTranslation")
+local t = require("commandTranslate")
 local m=component.proxy(component.list("modem")())
+local computer = require("computer")
 
 local hostAddress = ""
 local comPort = 2000
 local responsePort = 2001
 
-
+print("Address:"..computer.address())
 m.open(comPort)
 m.open(responsePort)
 
@@ -27,8 +29,13 @@ end
 
 local function receive()
 	while true do
-		local evnt,_,_,_,_,cmd = computer.pullSignal()
-		if evnt=="modem_message" then return t.translate(cmd) end
+		--issue is here, program needs to handle any number of arguments after the first
+		local evnt,_,_,_,_,cmd,args = computer.pullSignal()
+		if evnt=="modem_message" then
+			print(cmd)
+			for k,v in pairs(args) do print(k,v) end
+			return t.translate(cmd,args)
+		end
 	end
 end
 

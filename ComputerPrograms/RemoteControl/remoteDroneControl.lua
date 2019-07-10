@@ -14,7 +14,7 @@ local function funcStr()
 	funcs[2] = [[function moveX(amnt) drone.move(amnt,0,0) end]]
 	funcs[3] = [[function moveY(amnt) drone.move(0,amnt,0) end]]
 	funcs[4] = [[function quickLeash() return leash.leash(sides.bottom) end]]
-	funcs[5] = [[function ground() moveY(-10) while(drone.getAcceleration() > 0) do moveY(-1) end return true end]]
+	funcs[5] = [[function ground() moveY(-1) while(drone.getAcceleration() > 0) do moveY(-1) end return true end]]
 	return table.concat(funcs,"\n")
 end
 
