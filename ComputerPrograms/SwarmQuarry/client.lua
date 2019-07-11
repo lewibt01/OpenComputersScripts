@@ -30,11 +30,15 @@ end
 local function receive()
 	while true do
 		--issue is here, program needs to handle any number of arguments after the first
-		local evnt,_,_,_,_,cmd,args = computer.pullSignal()
+		local evnt,_,_,_,_,cmd,rawArgs = computer.pullSignal()
+		local args = table.pack(rawArgs)
+
 		if evnt=="modem_message" then
 			print(cmd)
-			for k,v in pairs(args) do print(k,v) end
-			return t.translate(cmd,args)
+			--[[if(args ~= nil) then
+				for k,v in pairs(args) do print(k,v) end
+			end]]
+			return t.translate(cmd,table.unpack(args))
 		end
 	end
 end

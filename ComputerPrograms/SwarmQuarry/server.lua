@@ -7,6 +7,7 @@ local comPort = 2000
 local responsePort = 2001
 local baseSignalStrength = 100
 local boostSignalStrength = 400 --signal strength of boosted messages
+local addresses = {}
 
 m.open(comPort)
 
@@ -19,26 +20,18 @@ function sendBoosted(address,port,...)
 	return result
 end
 
-function sendUnicast(id,cmd)
+function send(address,port,...)
+	local oldStrength = modem.getSterngth()
+	modem.setStrength(baseSignalStrength)
+	local result = modem.send(address,port,arg)
+	modem.setStrength(oldStrength)
+	return result
+end
+
+function test(address)
 	
 end
 
-function sendMulticast(groupId,cmd)
-
-end
-
-function pollClient(address)
-	sendBoosted(address,comPort,"handshake")
-end
-
---get a status update from all listening clients
-function pollClients()
-	local oldStrength = modem.getStrength()
-	modem.setStrength(400)
-
-end
-
---[[compound functions]]
-function arrangeRobots()
+function command(address,...)
 
 end
