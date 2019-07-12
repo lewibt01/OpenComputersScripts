@@ -2,36 +2,52 @@
 
 local component = require("component")
 local event = require("event")
+local computer = require("computer")
 local m = component.modem
 local comPort = 2000
 local responsePort = 2001
 local baseSignalStrength = 100
 local boostSignalStrength = 400 --signal strength of boosted messages
-local addresses = {}
+local addresses = {"75c263f1-8a52-42ac-aa41-edadef9b5cd2"}
 
 m.open(comPort)
+m.open(responsePort)
 
 --[[base functions]]
 function sendBoosted(address,port,...)
-	local oldStrength = modem.getStrength()
-	modem.setStrength(boostSignalStrength)
-	local result = modem.send(address,port,arg)
-	modem.setStrength(oldStrength)
+	local oldStrength = m.getStrength()
+	m.setStrength(boostSignalStrength)
+	local result = m.send(address,port,arg)
+	m.setStrength(oldStrength)
 	return result
 end
 
 function send(address,port,...)
-	local oldStrength = modem.getSterngth()
-	modem.setStrength(baseSignalStrength)
-	local result = modem.send(address,port,arg)
-	modem.setStrength(oldStrength)
+	local oldStrength = m.getStrength()
+	m.setStrength(baseSignalStrength)
+	local result = m.send(address,port,arg)
+	m.setStrength(oldStrength)
 	return result
 end
 
-function test(address)
+function receive()
 	
+	while true do
+		local evnt,_,_,_,_,response = computer.pullSignal()
+
+		if evnt=="modem_message" then
+			return response
+		end
+	end
+end
+
+function test(address)
+	send(address,comPort,"forward")
+	receive()
 end
 
 function command(address,...)
 
 end
+
+test(addresses[1])

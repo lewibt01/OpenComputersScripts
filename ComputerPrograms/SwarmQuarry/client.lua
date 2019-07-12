@@ -5,7 +5,7 @@ local t = require("commandTranslate")
 local m=component.proxy(component.list("modem")())
 local computer = require("computer")
 
-local hostAddress = ""
+local hostAddress = "ec54a72a-1121-4246-82c4-d39212481987"
 local comPort = 2000
 local responsePort = 2001
 
