@@ -7,3 +7,5 @@ function addons.splitStr(inputStr,delim)
 	end
 	return pieces
 end
+
+return addons

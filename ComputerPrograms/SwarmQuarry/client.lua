@@ -18,6 +18,11 @@ local function respond(...)
     m.send(hostAddress, responsePort, table.unpack(args))
 end
 
+local function broadcast(...)
+	local args=table.pack(...)
+	m.broadcast(responsePort,table.unpack(args))
+end
+
 --[[
 local function receive()
     while true do
@@ -38,7 +43,11 @@ local function receive()
 			--[[if(args ~= nil) then
 				for k,v in pairs(args) do print(k,v) end
 			end]]
-			return t.translate(cmd,table.unpack(args))
+			if(cmd == "handshake") then
+				return "handshake"
+			else
+				return t.translate(cmd,table.unpack(args))
+			end
 		end
 	end
 end
@@ -46,7 +55,8 @@ end
 
 while true do
 	local result = receive()
-	respond(result)
+	--respond(result)
+	broadcast(result)
 end
 --[[
 while true do

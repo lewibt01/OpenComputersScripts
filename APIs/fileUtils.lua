@@ -18,7 +18,9 @@ end
 
 function fileOps.readString(path)
 	file = io.open(path,"r")
-	return io.read(file)
+	data = file:read()
+	file:close()
+	return data
 end
 
 function fileOps.appendString(data,path)

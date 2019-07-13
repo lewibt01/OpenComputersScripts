@@ -1,4 +1,4 @@
-local arg = {...}
+--local arg = {...}
 
 local component = require("component")
 local modem = component.modem
@@ -12,13 +12,16 @@ local timeout = 3
 modem.open(comPort)
 modem.open(respPort)
 
-local args = table.pack(arg)
-modem.broadcast(comPort,table.unpack(args))
+local function command(...)
+	modem.broadcast(comPort,...)
+	local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(timeout,"modem_message")
+	return data
+	--[[
+	print(localAddress,remoteAddress)
+	print(port,distance)
+	print(data)
+	]]
+end
 
-local kind,localAddress,remoteAddress,port,distance,data = event.pull(timeout,"modem_message")
 
-
-print(localAddress,remoteAddress)
-print(port,distance)
-print(data)
-
+print(command("select",1))
