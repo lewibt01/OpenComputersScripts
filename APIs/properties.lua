@@ -10,7 +10,7 @@ end
 
 function props.add(key,value)
 	local propString = table.concat({key,value},":")
-	f.writeString(propString,props.propFilePath)
+	f.appendString(propString,props.propFilePath)
 end
 
 function props.get(key)
@@ -24,6 +24,18 @@ function props.get(key)
 		end
 	end
 	return nil
+end
+
+function props.getAll()
+	local propFile = f.readString(props.propFilePath)
+	local lines = s.splitStr(propFile,"\n")
+
+	local propTable = {}
+	for i=1,#lines do
+		local pair = s.splitStr(lines[i],":")
+		propTable[pair[1]] = pair[2]
+	end
+	return propTable
 end
 
 function props.del(index)

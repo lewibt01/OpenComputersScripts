@@ -1,16 +1,29 @@
 internet = require("internet")
 
 local github = {}
-github.BaseURL = "https://raw.githubusercontent.com/lewibt01/OpenComputersScripts/master/"
+github.baseURL = "https://raw.githubusercontent.com/lewibt01/OpenComputersScripts/master/"
 
-function github.ReadFile(name)
-	local handle = internet.open(BaseURL..name)
+--[[
+function github.readFile(name)
+	local handle = internet.open(github.baseURL..name, 443)
 	local data = handle:read()
 	handle:close()
 	return data
 end
+]]
+function github.requestFile(name)
+	local data = internet.request(github.baseURL..name)()
+	return data
+end
 
-function github.Clone(name,folderPath)
+function github.pull(name,dest)
+	local data = github.requestFile(name)
+	local file = io.open(dest,"w")
+	file:write(data)
+	file:close()
+end
+
+function github.clone(name,folderPath)
 	local data = github.ReadFile(name)
 	
 	--ensure the folder path has a / at the end for when we append the file name

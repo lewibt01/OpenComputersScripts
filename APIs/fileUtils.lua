@@ -11,20 +11,20 @@ function fileOps.exists(path)
 end
 
 function fileOps.writeString(data,path)
-	file = io.open(path,"w")
+	local file = io.open(path,"w")
 	file:write(tostring(data))
 	file:close()
 end
 
 function fileOps.readString(path)
-	file = io.open(path,"r")
+	local file = io.open(path,"r")
 	data = file:read()
 	file:close()
 	return data
 end
 
 function fileOps.appendString(data,path)
-	file = io.open(path,"a")
+	local file = io.open(path,"a")
 	file:write(tostring(data))
 	file:close()
 end
