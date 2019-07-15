@@ -1,2 +1,10 @@
 ComputerPrograms/fuelTest.lua:/home/fuelTest.lua
 ComputerPrograms/SwarmQuarry/server.lua:/home/swarm/server.lua
+APIs/fileUtils.lua:/usr/lib/fileUtils.lua
+APIs/github.lua:/usr/lib/github.lua
+APIs/gpsMove.lua:/usr/lib/gpsMove.lua
+APIs/properties.lua:/usr/lib/properties.lua
+APIs/stringUtils.lua:/usr/lib/stringUtils.lua
+APIs/numberUtils.lua:/usr/lib/numberUtils.lua
+APIs/commandTranslate.lua:/usr/lib/commandTranslate.lua
+APIs/registration.lua:/usr/lib/registration.lua
