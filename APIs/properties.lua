@@ -28,6 +28,10 @@ end
 
 function props.getAll()
 	local propFile = f.readString(props.propFilePath)
+	
+	--make sure the property file wasn't empty
+	if(propFile == "") then return {} end
+
 	local lines = s.splitStr(propFile,"\n")
 
 	local propTable = {}

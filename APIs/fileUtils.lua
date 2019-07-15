@@ -1,3 +1,6 @@
+local s = require("stringUtils")
+local fs = require("filesystem")
+
 local fileOps = {}
 
 function fileOps.exists(path)
@@ -18,7 +21,7 @@ end
 
 function fileOps.readString(path)
 	local file = io.open(path,"r")
-	data = file:read()
+	data = file:read("*a")
 	file:close()
 	return data
 end
@@ -30,6 +33,14 @@ function fileOps.appendString(data,path)
 end
 
 function fileOps.createFile(path)
+	local pieces = s.splitStr(path,"/")
+	local appended = ""
+	for i=1,#pieces-1 do
+		appended = appended..pieces[i].."/"	
+	end
+	if not (fs.exists(appended)) then
+		fs.makeDirectory(appended)
+	end
 	fileOps.writeString("",path)
 end
 

@@ -1,4 +1,5 @@
 internet = require("internet")
+f = require("fileUtils")
 
 local github = {}
 github.baseURL = "https://raw.githubusercontent.com/lewibt01/OpenComputersScripts/master/"
@@ -18,6 +19,7 @@ end
 
 function github.pull(name,dest)
 	local data = github.requestFile(name)
+	f.createFile(dest)
 	local file = io.open(dest,"w")
 	file:write(data)
 	file:close()
