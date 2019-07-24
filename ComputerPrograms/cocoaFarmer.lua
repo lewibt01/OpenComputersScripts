@@ -1,4 +1,8 @@
+local component = require("component")
+local robot = require("robot")
+
 local analyze = component.geolyzer.analyze(3) -- 3 is the front of the robot
+local bonemeal = 2 --which slot to check for bonemeal in
 
 function getFacing()    -- Get the facing of the cocoa bean
     for k,v in pairs(analyze) do
@@ -64,3 +68,5 @@ function growCocoa()    -- Fertilize as needed
         end
     end
 end
+
+growCocoa()
