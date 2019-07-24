@@ -95,6 +95,7 @@ function interpret(input)
             robot.select(15)
         elseif(tmp == "^") then
             robot.select(16)
+        end
     end
 end
 

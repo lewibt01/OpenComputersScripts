@@ -1,8 +1,7 @@
 local component = require("component")
+local tunnel = component.tunnel
 local r = require("robot")
-local g = require("gpsMove")
 local t = require("commandTranslate")
-local m=component.proxy(component.list("modem")())
 local computer = require("computer")
 
 local hostAddress = "ec54a72a-1121-4246-82c4-d39212481987"
@@ -10,17 +9,10 @@ local comPort = 2000
 local responsePort = 2001
 
 print("Address:"..computer.address())
-m.open(comPort)
-m.open(responsePort)
 
-local function respond(...)
-    local args=table.pack(...)
-    m.send(hostAddress, responsePort, table.unpack(args))
-end
-
-local function broadcast(...)
-	local args=table.pack(...)
-	m.broadcast(responsePort,table.unpack(args))
+local function send(...)
+	local args = table.pack(...)
+	tunnel.send(table.unpack(args))
 end
 
 --[[
@@ -56,7 +48,7 @@ end
 while true do
 	local result = receive()
 	--respond(result)
-	broadcast(result)
+	send(result)
 end
 --[[
 while true do

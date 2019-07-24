@@ -4,11 +4,14 @@ local component = require("component")
 local event = require("event")
 local computer = require("computer")
 local m = component.modem
+local p = require("properties")
+
 local comPort = 2000
 local responsePort = 2001
 local baseSignalStrength = 100
 local boostSignalStrength = 400 --signal strength of boosted messages
-local addresses = {"75c263f1-8a52-42ac-aa41-edadef9b5cd2"}
+--local addresses = {"75c263f1-8a52-42ac-aa41-edadef9b5cd2"}
+local addresses = {p.get("registrant0")}
 
 m.open(comPort)
 m.open(responsePort)

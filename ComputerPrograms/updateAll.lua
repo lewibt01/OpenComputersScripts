@@ -8,7 +8,6 @@ p.propFilePath = "/usr/programs.prop"
 
 --programs will be in the format <git url>:<destination path>
 local programs = p.getAll()
-local doReboot = false
 
 if(f.exists(p.propFilePath)) then
 	print(#programs)
@@ -18,13 +17,9 @@ if(f.exists(p.propFilePath)) then
 		g.pull(k,v)
 	end
 
-	doReboot = true
-else
-	print(p.propFilePath.." is missing.")
-end
-
-if(doReboot) then
 	print("Rebooting")
 	os.sleep(2)
 	c.shutdown(true)
+else
+	print(p.propFilePath.." is missing.")
 end

@@ -97,6 +97,8 @@ function cmd.translate(input,...)
 		else
 			return c[input]()
 		end
+	else
+		return c[input]()
 	end
 end
 
