@@ -9,12 +9,12 @@ local os = require("os")
 local CHANNEL_GPS = 65534
 
 local modem = component.modem
-local navigation = component.navigation
+--local navigation = component.navigation
 
 local function printUsage()
   print( "Usages:" )
   print( "gps host <x> <y> <z>" )
-  print( "gps autohost <x> <y> <z> <i>" )
+  --print( "gps autohost <x> <y> <z> <i>" )
   print( "gps locate" )
 end
 
@@ -42,6 +42,7 @@ local function robot()
   end
 end
 
+--[[
 local function getfacing()
   local facing = navigation.getFacing()
   if facing >= 4 then
@@ -51,13 +52,13 @@ local function getfacing()
   end
   return facing
 end
+]]
 
 local sCommand = tArgs[1]
 if sCommand == "locate" then
   if wirelessmodem() then
     gps.locate( 2, true )
   end
-
 elseif sCommand == "host" then
   if wirelessmodem() then
     local pos
@@ -88,6 +89,7 @@ elseif sCommand == "host" then
     end
   end
 
+--[[
 elseif sCommand == "autohost" then
   if wirelessmodem() and robot() then
     local offset
@@ -148,7 +150,7 @@ elseif sCommand == "autohost" then
     end
   elseif wirelessmodem() then
     print("Only robots can use autohost")
-  end
+  end]]
 else
   printUsage()
   return

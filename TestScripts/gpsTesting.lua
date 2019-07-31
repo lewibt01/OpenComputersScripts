@@ -37,17 +37,33 @@ function trilaterate(radii,knownPoints)
 	local yMover = 1
 	local zMover = 1
 
-	local startError = sum(findErr())
+	local startError = sum(findErr(guess))
 
 	--find the x direction
 	local oldGuess = guess
 	guess = v.new(1,0,0)
-	if(findErr(guess) > startEror) then
+	if(findErr(guess) > startError) then
 		xMover = xMover * -1
 	end
 
-	
+	--find the y direction
+	startError = sum(findErr(guess))
+	oldGuess = guess
+	guess = v.new(0,1,0)
+	if(findErr(guess) > startError) then
+		yMover = yMover * -1
+	end
 
+	startError = sum(findErr(guess))
+	oldGuess = guess
+	guess = v.new(0,0,1)
+	if(findErr(guess) > startError) then
+		zMover = zMover * -1
+	end
+
+	--move the x direction until error starts to grow
+	oldGuess = 
+	while()
 end
 
 --find out if a number fits within a range +- the error
