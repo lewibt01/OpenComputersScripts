@@ -33,7 +33,7 @@ function interpret(input)
 
         --movement functions
         if(tmp == "f") then
-            robot.fowrard()
+            robot.forward()
         elseif(tmp == "l") then
             robot.turnLeft()
         elseif(tmp == "r") then
