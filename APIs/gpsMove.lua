@@ -39,6 +39,7 @@ function gpsMove.forward()
 	return result
 end
 
+--[[
 function gpsMove.back()
 	local result = r.back()
 	if(result) then
@@ -56,6 +57,7 @@ function gpsMove.back()
 	end
 	return result
 end
+]]
 
 function gpsMove.up()
 	local result = r.up()
@@ -92,6 +94,17 @@ function gpsMove.turnLeft()
 end
 
 --[[Compund Functions]]
+
+function gpsMove.turnTo(orient)
+	if((orient < 4) and (orient > 0)) then
+		while(gpsMove.orientation ~= orient) do
+			gpsMove.turnRight()
+		end
+	else
+		print("orientation must be < 4")
+	end
+end
+
 function gpsMove.turnTo(orient)
 	orient = orient % 4
 	local result

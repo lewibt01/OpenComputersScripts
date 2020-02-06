@@ -1,4 +1,5 @@
 r = require("robot")
+g = require("gpsMove")
 
 defaultDepth = 40
 
