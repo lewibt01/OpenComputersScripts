@@ -47,7 +47,6 @@ function gpsMove.forward()
 	return result
 end
 
---[[
 function gpsMove.back()
 	local result = r.back()
 	if(result) then
@@ -60,12 +59,11 @@ function gpsMove.back()
 		elseif(gpsMove.orientation == 3) then
 			gpsMove.pos[1] = gpsMove.pos[1] + 1 
 		else
-			print("Error in gpsMove.back()")
+			debug("Error in gpsMove.back()")
 		end
 	end
 	return result
 end
-]]
 
 function gpsMove.up()
 	local result = r.up()
