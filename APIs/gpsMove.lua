@@ -1,5 +1,13 @@
 r = require("robot")
 
+local debugFlag = false
+
+local function debug(...)
+	if(debugFlag) then
+		print(...)
+	end
+end
+
 local gpsMove = {}
 
 --keep track of localized location
@@ -32,7 +40,7 @@ function gpsMove.forward()
 		elseif(gpsMove.orientation == 3) then
 			gpsMove.pos[1] = gpsMove.pos[1] - 1 --decrement x to go west
 		else
-			print("Error in gpsMove.forward()")
+			debug("Error in gpsMove.forward()")
 			return false
 		end
 	end
@@ -94,7 +102,7 @@ function gpsMove.turnLeft()
 end
 
 --[[Compund Functions]]
-
+--[[
 function gpsMove.turnTo(orient)
 	if((orient < 4) and (orient > 0)) then
 		while(gpsMove.orientation ~= orient) do
@@ -104,29 +112,39 @@ function gpsMove.turnTo(orient)
 		print("orientation must be < 4")
 	end
 end
+]]
 
 function gpsMove.turnTo(orient)
+	debug("///////////////////////////////")
+	debug("/	raw orient = "..orient)
 	orient = orient % 4
-	local result
+	debug("/	orient start: "..gpsMove.orientation.." target: "..orient)
+	--print("/	orienting to "..orient)
 	local direction = orient-gpsMove.orientation --this will be positive/negative to denote direction of the turn, actual value does not matter, just the parity
-	local magnitude = math.abs(direction)--how many turns we will have to make, there should be no more than 2
-
-	while(magnitude > 2) do
-		magnitude = magnitude - 2
+	if(direction > 2) then
+		direction = (direction*-1) % -2
 	end
+	debug("/	direction raw: "..orient-gpsMove.orientation.." adjusted: "..direction)
+	debug("/	turning "..direction)
+
+	local magnitude = math.abs(direction)--how many turns we will have to make, there should be no more than 2
+	debug("/	magnitude raw: "..math.abs(direction).." adjusted: "..magnitude)
 
 	local turnFunc --will store a reference to the turn function being called based on <direction> parity
 	if(direction > 0) then
 		turnFunc = gpsMove.turnRight
+		debug("/	turnRight "..magnitude)
 	elseif(direction < 0) then
 		turnFunc = gpsMove.turnLeft
+		debug("/	turnLeft "..magnitude)
 	elseif(direction == 0) then
 		--do nothing, we are 0 turns away from the desired orientation
-		print("No turn necessary")
+		debug("/	No turn necessary")
 	else
-		print("Error in turnTo()")
+		debug("/	Error in turnTo()")
 	end
 
+	local result
 	for i=1,magnitude do
 		result = turnFunc()
 	end
@@ -138,7 +156,7 @@ function gpsMove.moveTo(x,y,z)
 	local dX = x-gpsMove.pos[1]
 	local dY = y-gpsMove.pos[2]
 	local dZ = z-gpsMove.pos[3]
-	print("Delta",dX,dY,dZ)
+	debug("Delta",dX,dY,dZ)
 
 	local function moveAmnt(func,amnt)
 		local result
@@ -152,8 +170,10 @@ function gpsMove.moveTo(x,y,z)
 		local result
 		if(amount > 0) then
 			result = moveAmnt(gpsMove.up,amount)
+			debug("up "..amount)
 		elseif(amount < 0) then
 			result = moveAmnt(gpsMove.down,amount)
+			debug("down "..amount)
 		end
 		return result
 	end
@@ -162,8 +182,10 @@ function gpsMove.moveTo(x,y,z)
 	local function moveXAmnt(amount)
 		if(amount > 0) then
 			gpsMove.turnTo(1)
+			debug("X+ "..amount)
 		elseif(amount < 0) then
 			gpsMove.turnTo(3)
+			debug("X- "..amount)
 		end
 		return moveAmnt(gpsMove.forward,amount)
 	end
@@ -172,8 +194,10 @@ function gpsMove.moveTo(x,y,z)
 	local function moveZAmnt(amount)
 		if(amount > 0) then
 			gpsMove.turnTo(2)
+			debug("Z+ "..amount)
 		elseif(amount < 0) then
 			gpsMove.turnTo(0)
+			debug("Z- "..amount)
 		end
 		return moveAmnt(gpsMove.forward,amount)
 	end
