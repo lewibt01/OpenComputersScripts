@@ -1,4 +1,5 @@
 local component = require("component")
+local modem = component.modem
 local tunnel = component.tunnel
 local r = require("robot")
 local t = require("commandTranslate")
@@ -8,9 +9,17 @@ local hostAddress = "ec54a72a-1121-4246-82c4-d39212481987"
 local comPort = 2000
 local responsePort = 2001
 
-print("Address:"..computer.address())
+print("Address: "..computer.address())
 
-local function send(...)
+local function send(address,...)
+	local args = table.pack(...)
+	if(not modem.isOpen(responsePort)) then
+		modem.open(responsePort)
+	end
+	modem.send(address,comPort,...)
+end
+
+local function sendTunnel(...)
 	local args = table.pack(...)
 	tunnel.send(table.unpack(args))
 end
