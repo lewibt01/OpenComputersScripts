@@ -4,7 +4,6 @@ f = require("fileUtils")
 local github = {}
 github.baseURL = "https://raw.githubusercontent.com/lewibt01/OpenComputersScripts/master/"
 
-
 function github.readFile(name)
     local handle = internet.open(github.baseURL..name, 443)
     local data = handle:read()
@@ -30,7 +29,6 @@ function github.pull(name,dest)
     file:write(data)
     file:close()
 end
-
 
 function github.clone(name,folderPath)
     local data = github.readFile(name)
