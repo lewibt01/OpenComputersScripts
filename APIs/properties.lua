@@ -53,7 +53,7 @@ function props.delByKey(key)
         local piece = s.splitStr(lines[i],":")[1]
         if(piece == key) then
             table.remove(lines,i)
-            break --remove only 1, not all
+            break --remove only 1, not all 
         end
     end
 
