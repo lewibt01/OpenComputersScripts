@@ -17,8 +17,7 @@ local function ensureDataDirectory()
 end
 
 local function saveData()
-  assert(ensureDataDirectory(),
-    "an error occurred trying to create directory at " .. DATA_PATH)
+  assert(ensureDataDirectory(), "an error occurred trying to create directory at " .. DATA_PATH)
   local stream = io.open(DATA_PATH .. DATA_FILE, "w")
   stream:write(serialization.serialize(position),
     "\n", serialization.serialize(orientation))
