@@ -3,9 +3,9 @@ c = require("computer")
 
 --measure and return how much energy a robot action uses
 function measure(func)
-	local energy = c.energy()
-	func()
-	return energy - c.energy()
+    local energy = c.energy()
+    func()
+    return energy - c.energy()
 end
 
 

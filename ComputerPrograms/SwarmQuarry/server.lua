@@ -18,35 +18,35 @@ m.open(responsePort)
 
 --[[base functions]]
 function sendBoosted(address,port,...)
-	local oldStrength = m.getStrength()
-	m.setStrength(boostSignalStrength)
-	local result = m.send(address,port,arg)
-	m.setStrength(oldStrength)
-	return result
+    local oldStrength = m.getStrength()
+    m.setStrength(boostSignalStrength)
+    local result = m.send(address,port,arg)
+    m.setStrength(oldStrength)
+    return result
 end
 
 function send(address,port,...)
-	local oldStrength = m.getStrength()
-	m.setStrength(baseSignalStrength)
-	local result = m.send(address,port,arg)
-	m.setStrength(oldStrength)
-	return result
+    local oldStrength = m.getStrength()
+    m.setStrength(baseSignalStrength)
+    local result = m.send(address,port,arg)
+    m.setStrength(oldStrength)
+    return result
 end
 
 function receive()
-	
-	while true do
-		local evnt,_,_,_,_,response = computer.pullSignal()
+    
+    while true do
+        local evnt,_,_,_,_,response = computer.pullSignal()
 
-		if evnt=="modem_message" then
-			return response
-		end
-	end
+        if evnt=="modem_message" then
+            return response
+        end
+    end
 end
 
 function test(address)
-	send(address,comPort,"forward")
-	receive()
+    send(address,comPort,"forward")
+    receive()
 end
 
 function command(address,...)

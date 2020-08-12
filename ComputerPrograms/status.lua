@@ -3,8 +3,8 @@ local computer = require("computer")
 local term = require("term")
 
 if(not term.isAvailable()) then
-	print("Screens/GPUs are required")
-	return
+    print("Screens/GPUs are required")
+    return
 end
 
 local maxMem = computer.totalMemory()

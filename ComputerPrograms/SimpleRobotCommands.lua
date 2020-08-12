@@ -6,10 +6,10 @@ robotAPI=component.robot
 
 --repeatedly attempt to call a function until it returns
 function repeatAttempt(numAttempts,timeInterval,func)
-	local counter = 0
-	while (not func() and counter<numAttempts) do
-		os.sleep(timeInterval)
-	end
+    local counter = 0
+    while (not func() and counter<numAttempts) do
+        os.sleep(timeInterval)
+    end
 end
 
 function isDigit(char)
@@ -117,11 +117,11 @@ function interpret_old(input)
             repeatAttempt(20,0.5,robot.forward)
         end
         if tmp=="e" then
-			repeatAttempt(20,0.5,robot.up)
+            repeatAttempt(20,0.5,robot.up)
             --while not robot.up() do os.sleep(0.1) end
         end
         if tmp=="c" then
-			repeatAttempt(20,0.5,robot.down)
+            repeatAttempt(20,0.5,robot.down)
             --while not robot.down() do os.sleep(0.1) end
         end
        

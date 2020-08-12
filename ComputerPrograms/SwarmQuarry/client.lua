@@ -12,16 +12,16 @@ local responsePort = 2001
 print("Address: "..computer.address())
 
 local function send(address,...)
-	local args = table.pack(...)
-	if(not modem.isOpen(responsePort)) then
-		modem.open(responsePort)
-	end
-	modem.send(address,comPort,...)
+    local args = table.pack(...)
+    if(not modem.isOpen(responsePort)) then
+        modem.open(responsePort)
+    end
+    modem.send(address,comPort,...)
 end
 
 local function sendTunnel(...)
-	local args = table.pack(...)
-	tunnel.send(table.unpack(args))
+    local args = table.pack(...)
+    tunnel.send(table.unpack(args))
 end
 
 --[[
@@ -34,30 +34,30 @@ end
 ]]
 
 local function receive()
-	while true do
-		--issue is here, program needs to handle any number of arguments after the first
-		local evnt,_,_,_,_,cmd,rawArgs = computer.pullSignal()
-		local args = table.pack(rawArgs)
+    while true do
+        --issue is here, program needs to handle any number of arguments after the first
+        local evnt,_,_,_,_,cmd,rawArgs = computer.pullSignal()
+        local args = table.pack(rawArgs)
 
-		if evnt=="modem_message" then
-			print(cmd)
-			--[[if(args ~= nil) then
-				for k,v in pairs(args) do print(k,v) end
-			end]]
-			if(cmd == "handshake") then
-				return "handshake"
-			else
-				return t.translate(cmd,table.unpack(args))
-			end
-		end
-	end
+        if evnt=="modem_message" then
+            print(cmd)
+            --[[if(args ~= nil) then
+                for k,v in pairs(args) do print(k,v) end
+            end]]
+            if(cmd == "handshake") then
+                return "handshake"
+            else
+                return t.translate(cmd,table.unpack(args))
+            end
+        end
+    end
 end
 
 
 while true do
-	local result = receive()
-	--respond(result)
-	send(result)
+    local result = receive()
+    --respond(result)
+    send(result)
 end
 --[[
 while true do

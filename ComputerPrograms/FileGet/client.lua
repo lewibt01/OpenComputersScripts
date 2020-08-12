@@ -28,8 +28,8 @@ repeat
   local ev = {pull((stime + timeout - uptime()), "(modem_message)(interrupted)")}
 
   if ev[1] == "interrupted" then
-  	print(ev[1])
-  	os.exit()
+    print(ev[1])
+    os.exit()
   elseif ev[1] == "modem_message" and ev[6] == "F_RESPONSE" then
     key = ev[7]
     response = true
@@ -49,8 +49,8 @@ repeat
   local ev = {pull((stime + timeout - uptime()), "(modem_message)(interrupted)")}
 
   if ev[1] == "interrupted" then
-  	print(ev[1])
-  	os.exit()
+    print(ev[1])
+    os.exit()
   elseif ev[1] == "modem_message" and ev[6] == key then
     stime = uptime() -- # refresh the timeout
     

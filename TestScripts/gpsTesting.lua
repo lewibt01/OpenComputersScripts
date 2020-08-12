@@ -6,100 +6,100 @@ v = require("vector")
 
 origin = v.new(0,0,0)
 pts = {
-	v.new(0,10,0),
-	v.new(10,0,0),
-	v.new(0,0,10),
-	v.new(0,-10,0)
+    v.new(0,10,0),
+    v.new(10,0,0),
+    v.new(0,0,10),
+    v.new(0,-10,0)
 }
 
 rads = {}
 for i=1,#pts do
-	rads[i] = v.distance(origin,pts[i])
+    rads[i] = v.distance(origin,pts[i])
 end
 
 --radii should be provided in their squared form
 --gives 2 possible coordinates
 function trilaterate(radii,knownPoints)
-	local function sum(t)
-		local s = 0
-		for i=1,#t do
-			s = s+t[i]
-		end
-		return s
-	end	
+    local function sum(t)
+        local s = 0
+        for i=1,#t do
+            s = s+t[i]
+        end
+        return s
+    end 
 
-	local function findErr(g)
-		findAccuracy(knownPoints,radii,g)
-	end
+    local function findErr(g)
+        findAccuracy(knownPoints,radii,g)
+    end
 
-	local guess = v.new(0,0,0) 
-	local xMover = 1
-	local yMover = 1
-	local zMover = 1
+    local guess = v.new(0,0,0) 
+    local xMover = 1
+    local yMover = 1
+    local zMover = 1
 
-	local startError = sum(findErr(guess))
+    local startError = sum(findErr(guess))
 
-	--find the x direction
-	local oldGuess = guess
-	guess = v.new(1,0,0)
-	if(findErr(guess) > startError) then
-		xMover = xMover * -1
-	end
+    --find the x direction
+    local oldGuess = guess
+    guess = v.new(1,0,0)
+    if(findErr(guess) > startError) then
+        xMover = xMover * -1
+    end
 
-	--find the y direction
-	startError = sum(findErr(guess))
-	oldGuess = guess
-	guess = v.new(0,1,0)
-	if(findErr(guess) > startError) then
-		yMover = yMover * -1
-	end
+    --find the y direction
+    startError = sum(findErr(guess))
+    oldGuess = guess
+    guess = v.new(0,1,0)
+    if(findErr(guess) > startError) then
+        yMover = yMover * -1
+    end
 
-	startError = sum(findErr(guess))
-	oldGuess = guess
-	guess = v.new(0,0,1)
-	if(findErr(guess) > startError) then
-		zMover = zMover * -1
-	end
+    startError = sum(findErr(guess))
+    oldGuess = guess
+    guess = v.new(0,0,1)
+    if(findErr(guess) > startError) then
+        zMover = zMover * -1
+    end
 
-	--move the x direction until error starts to grow
-	oldGuess = 
-	while()
+    --move the x direction until error starts to grow
+    oldGuess = 
+    while()
 end
 
 --find out if a number fits within a range +- the error
 --error should be typically small
 function isWithin(number,target,err)
-	if(number <= target+err and number >= target-err) then
-		return true
-	else
-		return false
-	end
+    if(number <= target+err and number >= target-err) then
+        return true
+    else
+        return false
+    end
 end
 
 function findAccuracy(knownPoints,distances,targetPoint)
-	local accuracy = 0.01
-	local i=1
-	local differences = {}
-	for i=1,#knownPoints do
-		differences[i] = v.distance(knownPoints[i], targetPoint) - distances[i]
-	end
+    local accuracy = 0.01
+    local i=1
+    local differences = {}
+    for i=1,#knownPoints do
+        differences[i] = v.distance(knownPoints[i], targetPoint) - distances[i]
+    end
 
-	return differences
+    return differences
 end
 
 function isPointValid(knownPoints,distances,targetPoint)
-	local accuracy = 0.01
-	local i=1
-	local differences = {}
-	for i=1,#knownPoints do
-		local tmpDist = v.distance(knownPoints[i], targetPoint)
-		
-		if not isWithin(tmpDist,distances[i],accuracy) then
-			return false
-		end
-	end
+    local accuracy = 0.01
+    local i=1
+    local differences = {}
+    for i=1,#knownPoints do
+        local tmpDist = v.distance(knownPoints[i], targetPoint)
+        
+        if not isWithin(tmpDist,distances[i],accuracy) then
+            return false
+        end
+    end
 
-	return true
+    return true
 end
 
 

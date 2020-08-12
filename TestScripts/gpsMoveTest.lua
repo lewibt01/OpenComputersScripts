@@ -4,17 +4,17 @@ r  = require("robot")
 g = require("gpsMove")
 
 function printInfo()
-	io.write("#	")
-	g.printPosition()
-	io.write("#	")
-	g.printOrientation()
+    io.write("# ")
+    g.printPosition()
+    io.write("# ")
+    g.printOrientation()
 end
 
 function test(x,y,z)
-	print("#######################")
-	print("#	"..g.positionStr().." -> {"..x..","..y..","..z.."}")
-	g.moveTo(x,y,z)
-	printInfo()
+    print("#######################")
+    print("#    "..g.positionStr().." -> {"..x..","..y..","..z.."}")
+    g.moveTo(x,y,z)
+    printInfo()
 end
 
 g.reZero()

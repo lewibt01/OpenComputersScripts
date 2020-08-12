@@ -6,7 +6,7 @@ g = require("gpsMove")
 t = require("commandTranslation")
 
 function testMove(x,y,z)
-	g.moveTo(x,y,z)
-	print(g.positionStr(),g.orientationStr())
+    g.moveTo(x,y,z)
+    print(g.positionStr(),g.orientationStr())
 end
 
