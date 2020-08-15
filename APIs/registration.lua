@@ -2,15 +2,16 @@ local modem = require("component").modem
 local p = require("properties")
 local event = require("event")
 
-register  = {}
+local register = {}
 register.addresses = {}
+register.port = 4321
 
 function register.listen()
-    modem.open(4321)
+    modem.open(register.port)
     while true do
         local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(timeout,"modem_message")
         if(data == "register") then
-            --make sure we don't end up with duplicate keys
+            --make sure we don't end up with overwritten keys
             local i = 0
             while (p.get("registrant"..i) ~= nil) do
                 i = i+1
@@ -21,14 +22,14 @@ function register.listen()
             return remoteAddress
         end
     end
-    modem.close(4321)
+    modem.close(register.port)
     return false
 end
 
 function register.announce()
-    modem.open(4321)
-    modem.broadcast(4321,"register")
-    modem.close(4321)
+    modem.open(register.port)
+    modem.broadcast(register.port,"register")
+    modem.close(register.port)
 end
 
 return register
