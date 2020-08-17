@@ -9,3 +9,4 @@ APIs/command.lua:/usr/lib/command.lua
 APIS/groupMovement.lua:/usr/lib/groupMovement.lua
 APIs/registration.lua:/usr/lib/registration.lua
 APIs/math3d.lua:/usr/lib/math3d.lua
+ComputerPrograms/SwarmQuarry/client.lua:/home/swarm/client.lua
