@@ -4,7 +4,7 @@ local arg = { ... }
 function main(input)
     if(input == "host") then
         r.listen()
-    elseif(input == "join")
+    elseif(input == "join") then
         r.announce()
     else
         print("Usage: registration <host/join>") 
