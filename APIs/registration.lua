@@ -5,6 +5,7 @@ local event = require("event")
 local register = {}
 register.addresses = {}
 register.port = 4321
+register.timeout = 10
 
 function register.getRegistrants()
     props = p.getAll()
@@ -20,9 +21,9 @@ end
 function register.listen()
     modem.open(register.port)
     while true do
-        local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(timeout,"modem_message")
+        local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(register.timeout,"modem_message")
         if(data == "register") then
-            --make sure we don't end up with overwritten keys
+            --make sure we don't end up with duplicate keys
             local i = 0
             while (p.get("registrant"..i) ~= nil) do
                 i = i+1
@@ -30,7 +31,7 @@ function register.listen()
 
             p.add("registrant"..i,remoteAddress)
             --print("Registered "..remoteAddress)
-            modem.send(remoteAddress,register.port,localAddress)
+            modem.send("registered",register.port,localAddress)
             return remoteAddress
         end
     end
@@ -41,9 +42,13 @@ end
 function register.announce()
     modem.open(register.port)
     modem.broadcast(register.port,"register")
+    
     --wait for handshake
-    local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(timeout,"modem_message")
-
+    local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(register.timeout,"modem_message")
+    if(data == "registered") then
+        p.set("host",remoteAddress)
+    end
+    
     modem.close(register.port)
 end
 
