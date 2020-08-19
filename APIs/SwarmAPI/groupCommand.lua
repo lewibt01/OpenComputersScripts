@@ -11,9 +11,9 @@ gCommand.responsePort = 2001
 
 --blindly commands the clients to perform the given command
 function gCommand.groupCommand(cmd)
-	for _,c in pairs(gCommand.clients) do
-		command.send(cmd)
-	end
+    for _,c in pairs(gCommand.clients) do
+        command.send(cmd)
+    end
 end
 
 return gCommand
