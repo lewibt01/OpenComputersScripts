@@ -2,7 +2,7 @@ local r = require("registration")
 local arg = { ... }
 
 function main(input)
-    if(input == "host")
+    if(input == "host") then
         r.listen()
     elseif(input == "join")
         r.announce()
