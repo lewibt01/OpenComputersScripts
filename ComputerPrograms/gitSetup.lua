@@ -4,6 +4,7 @@ i = require("internet")
 c = require("computer")
 fs = require("filesystem")
 
+--[[BEGIN STRINGUTILS API]]
 function splitStr(inputStr,delim)
     local pieces = {}
     for str in string.gmatch(inputStr,"([^"..delim.."]+)") do

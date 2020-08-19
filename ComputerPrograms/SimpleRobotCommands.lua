@@ -20,7 +20,6 @@ function isDigit(char)
     end
 end
 
-
 function aggressiveMove(numTries,moveFunc,attackFunc)
     while (not moveFunc()) and (counter < numTries) do
         attackFunc()

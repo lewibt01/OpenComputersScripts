@@ -6,6 +6,17 @@ local register = {}
 register.addresses = {}
 register.port = 4321
 
+function register.getRegistrants()
+    props = p.getAll()
+    clients = {}
+    for _,p in pairs(props) do
+        if(string.find(p,"registrant")) then
+            table.insert(clients,p)
+        end
+    end
+    return clients
+end 
+
 function register.listen()
     modem.open(register.port)
     while true do
