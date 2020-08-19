@@ -7,7 +7,7 @@ function main(input)
     elseif(input == "join")
         r.announce()
     else
-        print("Usage: registration <host/join>")
+        print("Usage: registration <host/join>") 
     end
 end
 
