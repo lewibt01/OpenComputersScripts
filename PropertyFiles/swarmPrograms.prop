@@ -6,9 +6,9 @@ APIs/stringUtils.lua:/usr/lib/stringUtils.lua
 APIs/numberUtils.lua:/usr/lib/numberUtils.lua
 APIs/commandTranslate.lua:/usr/lib/commandTranslate.lua
 APIs/command.lua:/usr/lib/command.lua
-APIS/groupCommand.lua:/usr/lib/groupCommand.lua
 APIs/registration.lua:/usr/lib/registration.lua
 APIs/math3d.lua:/usr/lib/math3d.lua
+APIS/SwarmAPI/groupCommand.lua:/usr/lib/groupCommand.lua
 ComputerPrograms/SwarmQuarry/client.lua:/home/swarm/client.lua
 ComputerPrograms/SwarmQuarry/server.lua:/home/swarm/server.lua
 ComputerPrograms/Swarm/swarmUpdate.lua:/home/swarm/update.lua
