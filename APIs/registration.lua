@@ -30,6 +30,7 @@ function register.listen()
 
             p.add("registrant"..i,remoteAddress)
             --print("Registered "..remoteAddress)
+            modem.send(remoteAddress,register.port,localAddress)
             return remoteAddress
         end
     end
@@ -40,6 +41,9 @@ end
 function register.announce()
     modem.open(register.port)
     modem.broadcast(register.port,"register")
+    --wait for handshake
+    local eventMsg,localAddress,remoteAddress,port,distance,data = event.pull(timeout,"modem_message")
+
     modem.close(register.port)
 end
 

@@ -3,8 +3,9 @@ local arg = { ... }
 
 function main(input)
     if(input == "host") then
-        r.listen()
+        print(r.listen())
     elseif(input == "join") then
+    	print(attempting to join network)
         r.announce()
     else
         print("Usage: registration <host/join>") 

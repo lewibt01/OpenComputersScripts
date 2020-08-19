@@ -9,7 +9,7 @@ if(not f.exists(props.propFilePath)) then
 end
 
 function props.add(key,value)
-    local propString = table.concat({key,value},":")
+    local propString = key..":"..value --table.concat({key,value},":")
     f.appendString(propString,props.propFilePath)
 end
 
@@ -24,6 +24,13 @@ function props.get(key)
         end
     end
     return nil
+end
+
+function props.set(key,value)
+    if(props.get(key) ~= nil) then
+        delByKey(key)
+    end
+    props.add(key,value)
 end
 
 function props.getAll()
