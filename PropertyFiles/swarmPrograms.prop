@@ -11,4 +11,5 @@ APIs/registration.lua:/usr/lib/registration.lua
 APIs/math3d.lua:/usr/lib/math3d.lua
 ComputerPrograms/SwarmQuarry/client.lua:/home/swarm/client.lua
 ComputerPrograms/SwarmQuarry/server.lua:/home/swarm/server.lua
+ComputerPrograms/Swarm/swarmUpdate.lua:/home/swarm/update.lua
 ComputerPrograms/register.lua:/home/register.lua

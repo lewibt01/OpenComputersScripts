@@ -74,6 +74,7 @@ end
 --[[BEGIN PROPERTIES API]]
 local props = {}
 local propFilePath = "/usr/programs.prop"
+local swarmFilePath = "/usr/swarmPrograms.prop"
 
 function getAll()
     local propFile = readString(propFilePath)
@@ -95,6 +96,7 @@ end
 --get programs file
 print("Retrieving programs...")
 pull("PropertyFiles/programs.prop",propFilePath)
+pull("PropertyFiles/swarmPrograms.prop",swarmFilePath)
 
 --programs will be in the format <git url>:<destination path>
 local programs = getAll()
