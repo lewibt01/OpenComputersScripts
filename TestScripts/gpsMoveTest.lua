@@ -1,5 +1,6 @@
-package.path = package.path..";I:\\Documents\\GitHub\\OpenComputersScripts\\APIs\\?.lua"
-package.path = package.path..";I:\\Users\\Owner\\Documents\\GitHub\\OpenComputersScripts\\TestScripts\\?.lua"
+package.path = package.path..";G:\\Documents\\GitHub\\OpenComputersScripts\\APIs\\?.lua"
+package.path = package.path..";G:\\Documents\\GitHub\\OpenComputersScripts\\Mocks\\?.lua"
+--package.path = package.path..";I:\\Users\\Owner\\Documents\\GitHub\\OpenComputersScripts\\TestScripts\\?.lua"
 r  = require("robot")
 g = require("gpsMove")
 
@@ -14,7 +15,8 @@ function test(x,y,z)
     print("#######################")
     print("#    "..g.positionStr().." -> {"..x..","..y..","..z.."}")
     g.moveTo(x,y,z)
-    printInfo()
+    io.write("# ")
+    g.printOrientation()
 end
 
 g.reZero()
