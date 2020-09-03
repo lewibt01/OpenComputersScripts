@@ -44,4 +44,26 @@ function fileOps.createFile(path)
     fileOps.writeString("",path)
 end
 
+function fileOps.listFiles(path)
+    local objects = fs.list(path)
+    local result = {}
+    for el in table.unpack(objects) do
+        if(not fs.isDirectory(el)) then
+            table.insert(result,el)
+        end
+    end
+    return result
+end
+
+function fileOps.listFolders(path)
+    local objects = fs.list(path)
+    local result = {}
+    for el in table.unpack(objects) do
+        if(fs.isDirectory(el)) then
+            table.insert(result,el)
+        end
+    end
+    return result
+end 
+
 return fileOps
