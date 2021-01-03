@@ -1,4 +1,4 @@
-local filesystem = require("filesystem")
+local fs = require("filesystem")
 local serialization = require("serialization")
 local vector = require("vector")
 
@@ -10,10 +10,10 @@ local location = {}
 local position, orientation
 
 local function ensureDataDirectory()
-  if not filesystem.exists(DATA_PATH) then
-    return filesystem.makeDirectory(DATA_PATH)
+  if not fs.exists(DATA_PATH) then
+    return fs.makeDirectory(DATA_PATH)
   end
-  return filesystem.isDirectory(DATA_PATH)
+  return fs.isDirectory(DATA_PATH)
 end
 
 local function saveData()
