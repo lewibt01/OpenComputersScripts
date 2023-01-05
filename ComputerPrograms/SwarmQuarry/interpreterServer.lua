@@ -62,7 +62,7 @@ function translate(input,...)
     c["beep"] = comp.beep
     c["digColumnUp"] = digColumnUp
     c["digColumnDown"] = digColumnDown
-    c["dig"]
+    c["dig"] = dig
 
     
     if c[input] == nil then

@@ -1,5 +1,5 @@
-package.path = package.path..";G:\\Documents\\GitHub\\OpenComputersScripts\\APIs\\?.lua"
-package.path = package.path..";G:\\Documents\\GitHub\\OpenComputersScripts\\Mocks\\?.lua"
+package.path = package.path..";C:\\GitRepositories\\OpenComputersScripts\\APIs\\?.lua"
+package.path = package.path..";C:\\GitRepositories\\OpenComputersScripts\\Mocks\\?.lua"
 --package.path = package.path..";I:\\Users\\Owner\\Documents\\GitHub\\OpenComputersScripts\\TestScripts\\?.lua"
 v = require("vector")
 
